@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Football Hangman</title>
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+
+    <div id="container">
+        <h1 id="gameTitle">Football Hangman</h1>
+        <h2 id="winTracker">Wins:
+            <span id="numberWins"></span>
+        </h2>
+        <div id="game">
+
+        </div>
+        <div id="pictureContainer">
+            <img id="picture" src="assets/football.jpeg">
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var wordList = ["Packers", "Steelers", "Patriots", "Touchdown"];
+        var word = wordList[Math.floor(Math.random() * wordList.length)];
+        var guessesRemaining = 10;
+        var wrongGuess = [];
+        var wordArray = [];
+        var wins = 0;
+        var html = "";
+
+        //create array for word
+        for (i = 0; i < word.length; i++) {
+            wordArray.push(word[i]);
+            console.log(wordArray);
+        };
+
+        //create the view
+        for (i = 0; i < wordArray.length; i++) {
+            html += '<span class="' + wordArray[i] + '"> _ </span>';
+        }
+        html += '<div>Wrong guesses: <span id="wrongGuesses">  </span></div>';
+        html += '<div>Guesses remaining: <span id="guessesRemaining">  </span></div>';
+
+        document.getElementById("game").innerHTML = html;
+        guessesRemainingSpan = document.getElementById("guessesRemaining");
+        guessesRemainingSpan.textContent = guessesRemaining;
+        numberWinsSpan = document.getElementById("numberWins");
+        numberWinsSpan.textContent = wins;
+
+
+
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+            var wrongGuessesDiv = document.getElementById("wrongGuesses");
+
+            //make sure user still has guesses left
+            if (guessesRemaining < 1) {
+                //game over
+                console.log("game over");
+                html = '<h1 id="gameOver">Sorry, Game Over!</h1>';
+                document.getElementById("container").innerHTML = html;
+            }
+            //check if letter is in word
+            else if (word.indexOf(userGuess) === -1) {
+                //letter isn't in word
+                if (wrongGuess.indexOf(userGuess) === -1) {
+                    //add letter to wrongGuess index if it hasn't already been added
+                    wrongGuess.push(userGuess);
+                    wrongGuessesDiv.innerHTML += userGuess + " ";
+                };
+                guessesRemaining--;
+                guessesRemainingSpan.textContent = guessesRemaining;
+            } else {
+
+                //the user guess is a letter in the word
+                var guessClass = document.getElementsByClassName(userGuess);
+                for (i = 0; i < guessClass.length; i++) {
+                    guessClass[i].innerText = " " + userGuess + " ";
+                };
+
+                //remove userGuess from wordArray
+                wordArray = wordArray.filter(function (item) {
+                    return item !== userGuess;
+                });
+                console.log(wordArray);
+
+
+            };
+
+            //check if there are letters left to guess
+            if (wordArray.length < 1 && guessesRemaining > 0) {
+                //the user has won
+                console.log("you win");
+                changePhoto(word.toLowerCase());
+                wins++;
+                numberWinsSpan.textContent = wins;
+
+
+                //reset
+                wrongGuess = [];
+                wordArray = [];
+                html = "";
+                guessesRemaining = 10;
+                word = wordList[Math.floor(Math.random() * wordList.length)];
+                
+
+                //create array for word
+                for (i = 0; i < word.length; i++) {
+                    wordArray.push(word[i]);
+                    console.log(wordArray);
+                };
+                for (i = 0; i < wordArray.length; i++) {
+                    html += '<span class="' + wordArray[i] + '"> _ </span>';
+                }
+                html += '<div>Wrong guesses: <span id="wrongGuesses">  </span></div>';
+                html += '<div>Guesses remaining: <span id="guessesRemaining">  </span></div>';
+                
+                //ERROR HERE SOMEWHERE
+                document.getElementById("game").innerHTML = html;
+                guessesRemainingSpan = document.getElementById("guessesRemaining");
+                guessesRemainingSpan.textContent = "test";
+            };
+
+        };
+
+        function changePhoto(photoName) {
+            var newPhotoName = "assets/" + photoName + ".jpg";
+            document.getElementById("picture").src = newPhotoName;
+        };
+
+        /* TO DO
+        -it should have
+        -functions for repetitive tasks
+        -add pictures 
+        -fix lowercase/uppercase errors
+        -wrong guesses shouldn't show shift
+
+        done:
+        -track number of guesses
+        -add styling
+         */
+    </script>
+
+</body>
+
+</html>

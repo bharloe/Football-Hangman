@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors Part 2
+  </title>
+</head>
+
+<body>
+
+  <div>Your wins are:<div id="playerWins"></div></div>
+  <div>Your losses are:<div id="playerLosses"></div></div>
+  <div>Your ties are:<div id="playerTies"></div></div>
+
+
+  <script type="text/javascript">
+    //Declare variables
+    var wins = 0;
+    var losses = 0;
+    var ties = 0;
+
+    var playerWins = document.getElementById("playerWins");
+    playerWins.textContent = wins;
+
+    var playerLosses = document.getElementById("playerLosses");
+    playerLosses.textContent = losses;
+
+    var playerTies = document.getElementById("playerTies");
+    playerTies.textContent = ties;
+
+    // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
+    var computerChoices = ["r", "p", "s"];
+
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function (event) {
+
+      // Determines which key was pressed.
+      var userGuess = event.key;
+
+      // Randomly chooses a choice from the options array. This is the Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+
+
+      // Compare the players guess and computer guess
+      if (userGuess === "r" || userGuess === "p" || userGuess === "s") {
+
+        // Alerts the key the user pressed (userGuess).
+        alert("User guess: " + userGuess);
+
+        // Alerts the Computer's guess.
+        alert("Computer guess: " + computerGuess);
+
+        if (userGuess === computerGuess) {
+          alert("You have tied");
+          ties++;
+        }
+        else if (userGuess === "r" && computerGuess === "s") {
+          alert("You have won!");
+          wins++
+        }
+        else if (userGuess === "s" && computerGuess === "p") {
+          alert("You have won!");
+          wins++;
+        }
+        else if (userGuess === "p" && computerGuess === "r") {
+          alert("You have won!");
+          wins++;
+        } else {
+          alert("You have lost");
+          losses++;
+        };
+
+        playerWins.textContent = wins;
+        playerLosses.textContent = losses;
+        playerTies.textContent = ties;
+      }
+
+      
+
+
+
+    };
+  </script>
+
+</body>
+
+</html>
+<!--1 computer options and player options
+// 2 random choice from computer options 
+// 3 get player input
+// 4 compare computer and player choices
+//     -if they're equal it's a tie
+//     -if player = rock and computer = scissors player wins
+//     -if player = scissors and computer = paper player wins
+//     -if player = paper and computer = rocks player wins -->

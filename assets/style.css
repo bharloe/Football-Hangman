@@ -1,0 +1,65 @@
+body {
+  background-image: url("Sports.png");
+  font-family: "Arial", sans-serif;
+}
+
+h1 {
+  font-size: 250%;
+}
+
+h2 {
+  font-size: 200%;
+}
+
+#container {
+  height: 600px;
+  width: 700px;
+  background: rgba(0, 105, 0, 0.774);
+  color: white;
+  padding: 20px;
+  border-radius: 25px;
+  /* https://stackoverflow.com/questions/19461521/how-to-center-an-element-horizontally-and-vertically */
+  right: 50%;
+  bottom: 50%;
+  transform: translate(50%, 50%);
+  position: absolute;
+}
+
+#gameTitle {
+  text-align: center;
+}
+
+#winTracker {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#game {
+  padding-top: 10%;
+  /* background: rgba(255, 255, 255, 0.39); */
+  text-align: center;
+  font-size: 150%;
+  line-height: 50px;
+}
+
+#wrongGuesses {
+  padding-top: 5%;
+  font-size: 75%;
+}
+
+#gameOver {
+  text-align: center;
+  line-height: 500px;
+}
+#pictureContainer {
+  height: 210px;
+}
+#picture {
+    border: 1px solid white;
+  display: block;
+  max-width: 50%;
+  max-height: 100%;
+  margin: auto;
+  margin-top: 20px;
+  align-content: center;
+}
